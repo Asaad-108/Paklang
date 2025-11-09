@@ -687,7 +687,7 @@ YY_RULE_SETUP
 case 5:
 YY_RULE_SETUP
 #line 17 ".\\Lex.l"
-{ printf("Line %d: PUNCHUATION -> %s\n", line, yytext); }
+{ printf("Line %d: PUNCTUATION -> %s\n", line, yytext); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
