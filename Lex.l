@@ -14,7 +14,7 @@ int line = 1;
 
 "=="|"="|"+"|"-"|"*"|"/" { printf("Line %d: OPERATOR -> %s\n", line, yytext); }
 
-"("|")"|"{"|"}"|","|";" { printf("Line %d: PUNCT -> %s\n", line, yytext); }
+"("|")"|"{"|"}"|","|";" { printf("Line %d: PUNCHUATION -> %s\n", line, yytext); }
 
 [0-9]+\.[0-9]+        { printf("Line %d: DECIMAL -> %s\n", line, yytext); }
 [0-9]+                { printf("Line %d: NUMBER -> %s\n", line, yytext); }
