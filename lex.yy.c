@@ -426,8 +426,12 @@ char *yytext;
 #define INITIAL 0
 #line 2 ".\\Lex.l"
 #include <stdio.h>
+
 int line = 1;
-#line 431 "lex.yy.c"
+FILE *tFout;         
+FILE *eFout;         
+FILE *yyin;          
+#line 435 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -578,10 +582,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 8 ".\\Lex.l"
+#line 12 ".\\Lex.l"
 
 
-#line 585 "lex.yy.c"
+#line 589 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -666,60 +670,61 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 10 ".\\Lex.l"
+#line 14 ".\\Lex.l"
 ;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 ".\\Lex.l"
+#line 15 ".\\Lex.l"
 { line++; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 13 ".\\Lex.l"
-{ printf("Line %d: KEYWORD -> %s\n", line, yytext); }
+#line 17 ".\\Lex.l"
+{ fprintf(tFout, "Line %d: KEYWORD -> %s\n", line, yytext); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 15 ".\\Lex.l"
-{ printf("Line %d: OPERATOR -> %s\n", line, yytext); }
+#line 19 ".\\Lex.l"
+{ fprintf(tFout, "Line %d: OPERATOR -> %s\n", line, yytext); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 17 ".\\Lex.l"
-{ printf("Line %d: PUNCTUATION -> %s\n", line, yytext); }
+#line 21 ".\\Lex.l"
+{ fprintf(tFout, "Line %d: PUNCTUATION -> %s\n", line, yytext); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 19 ".\\Lex.l"
-{ printf("Line %d: DECIMAL -> %s\n", line, yytext); }
+#line 23 ".\\Lex.l"
+{ fprintf(tFout, "Line %d: DECIMAL -> %s\n", line, yytext); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 20 ".\\Lex.l"
-{ printf("Line %d: NUMBER -> %s\n", line, yytext); }
+#line 24 ".\\Lex.l"
+{ fprintf(tFout, "Line %d: NUMBER -> %s\n", line, yytext); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 22 ".\\Lex.l"
-{ printf("Line %d: STRING -> %s\n", line, yytext); }
+#line 26 ".\\Lex.l"
+{ fprintf(tFout, "Line %d: STRING -> %s\n", line, yytext); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 24 ".\\Lex.l"
-{ printf("Line %d: IDENTIFIER -> %s\n", line, yytext); }
+#line 28 ".\\Lex.l"
+{ fprintf(tFout, "Line %d: IDENTIFIER -> %s\n", line, yytext); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 26 ".\\Lex.l"
-{ printf("Line %d: ERROR -> %s\n", line, yytext); }
+#line 30 ".\\Lex.l"
+{fprintf(tFout, "Line %d: ERROR -> %s\n", line, yytext);
+fprintf(eFout, "Line %d: ERROR -> %s\n", line, yytext);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 28 ".\\Lex.l"
+#line 33 ".\\Lex.l"
 ECHO;
 	YY_BREAK
-#line 723 "lex.yy.c"
+#line 728 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1605,12 +1610,37 @@ int main()
 	return 0;
 	}
 #endif
-#line 28 ".\\Lex.l"
+#line 33 ".\\Lex.l"
 
 
-int main(void) {
+int main() {
+
+    yyin = fopen("input.txt", "r");
+    if (!yyin) {
+        printf("Error opening input.txt\n");
+        return 1;
+    }
+
+    tFout = fopen("tokens.txt", "w");
+    if (!tFout) {
+        printf("Error opening tokens.txt\n");
+        fclose(yyin);
+        return 1;
+    }
+
+    eFout = fopen("errors.txt", "w");
+    if (!eFout) {
+        printf("Error opening errors.txt\n");
+        fclose(yyin);
+        fclose(tFout);
+        return 1;
+    }
+
     yylex();
+
+    fclose(tFout);
+    fclose(eFout);
+    fclose(yyin);
+
     return 0;
 }
-
-

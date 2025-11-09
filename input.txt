@@ -1,0 +1,40 @@
+riyazi a = 10;
+angerazi b = "Muhammad Asaad";
+HanYahNah flag = sach;
+
+likho("Starting PakLang Scanner Test");
+likho("Value of a is: ");
+likho(a);
+
+agar (a == 10) {
+    likho("Condition matched!");
+}
+warna {
+    likho("Not matched");
+}
+
+dobarah (i = 0; i < 5; i = i + 1) {
+    likho("Loop iteration");
+    likho(i);
+
+    agar (i == 3) {
+        ruko;
+    }
+
+    chalo;
+}
+
+poucho answer;
+
+jhootValue = jhoot;
+
+riyazi _test123 = 99;
+likho("Decimal check:");
+angerazi price = 123.456;
+
+likho("Done!");
+
+@invalid
+"unclosed string
+5a
+12.
