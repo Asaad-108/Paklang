@@ -1,0 +1,16 @@
+riyazi x;
+riyazi y;
+
+x = 10;
+y = 5;
+
+agar ( x ) {
+    likho(x);
+}
+warna {
+    likho(y);
+}
+
+dobarah ( x ) {
+    x = x - 1;
+}
