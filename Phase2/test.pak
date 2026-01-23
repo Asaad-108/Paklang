@@ -7,10 +7,10 @@ y = 5;
 agar ( x ) {
     likho(x);
 }
-warna {
+warnaa {
     likho(y);
 }
 
-dobarah ( x ) {
+dobaraha ( x ) {
     x = x - 1;
 }

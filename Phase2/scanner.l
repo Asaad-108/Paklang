@@ -1,7 +1,8 @@
 %{
 #include "parser.tab.h"
 #include <stdio.h>
-int line_no = 1;
+#include <stdlib.h>
+int lineNo = 1;
 %}
 
 %option noyywrap
@@ -9,7 +10,7 @@ int line_no = 1;
 %%
 
 [ \t]+          ;
-\n              { line_no++; }
+\n              { lineNo++; }
 
 "riyazi"        { return RIYAZI; }
 "angerazi"      { return ANGERAZI; }
@@ -32,7 +33,7 @@ int line_no = 1;
 ";"             { return ';'; }
 
 . {
-    printf("Lexical Error at line %d: %s\n", line_no, yytext);
+    printf("Lexical Error at line %d: %s\n", lineNo, yytext);
 }
 
 %%
